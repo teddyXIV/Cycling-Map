@@ -15,11 +15,11 @@ export default function App() {
         <View className="w-full justify-center items-center min-h-[85vh] px-4">
           <Image 
             source={images.logo}
-            className="w-[130px] h-[100px] mt-5"
+            className="w-[130px] h-[115px] mt-7"
             resizeMode="contain"/>
           <Image 
             source={images.map}
-            className="w-[300px] h-[300px] rounded-lg border-4 border-tertiary"
+            className="w-[250px] h-[250px] rounded-lg border-4 border-tertiary"
             resizeMode="contain"/>
             <View className="relative mt-5">
               <Text className="text-3xl text-white font-bold text-center">Explore with{' '}
@@ -28,8 +28,8 @@ export default function App() {
             </View>
             <Text className="text-sm text-gray-100 mt-3 text-center">Push your limits beyond what you thought was possible.</Text>
             <CustomButton
-              title="Explore"
-              handlePress={() => router.push('/home')}
+              title="Get started"
+              handlePress={() => router.push('/sign-in')}
               containerStyles="w-full mt-7"/>
         </View>
       </ScrollView>
