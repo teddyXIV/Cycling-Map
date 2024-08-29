@@ -8,6 +8,9 @@ import image from '../../constants/images'
 import CustomButton from '../../components/CustomButton'
 import { Link } from 'expo-router'
 
+import { db, auth } from "../firebase"
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+
 const SignUp = () => {
   const [form, setForm] = useState({
     username: '',
@@ -16,9 +19,24 @@ const SignUp = () => {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const submit = () => {
+  const submit = async (username, email, password) => {
+    try {
+        setIsSubmitting(true);
 
-  }
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+        const user = userCredential.user;
+
+        await db.collection('users').doc(user.uid).set({
+            username: username,
+            email: email,
+        })
+
+        setIsSubmitting(false);
+    } catch (error) {
+        console.error('Error signing up user: ', error.message);
+    }
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -50,7 +68,7 @@ const SignUp = () => {
           />
           <CustomButton 
             title="Sign up"
-            handlePress={submit}
+            handlePress={() => submit(form.username, form.email, form.password)}
             containerStyles={"mt-7"}
             isLoading={isSubmitting}
             />
