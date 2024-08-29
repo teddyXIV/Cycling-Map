@@ -12,7 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePattersn": [
+    "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {

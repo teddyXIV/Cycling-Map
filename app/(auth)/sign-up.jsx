@@ -10,6 +10,7 @@ import { Link } from 'expo-router'
 
 import { db, auth } from "../firebase"
 import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { collection, doc, setDoc } from 'firebase/firestore';
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -27,14 +28,15 @@ const SignUp = () => {
 
         const user = userCredential.user;
 
-        await db.collection('users').doc(user.uid).set({
+        const userRef = doc(collection(db, 'users'), user.uid);
+        await setDoc(userRef, {
             username: username,
-            email: email,
-        })
+            email: email
+        });
 
         setIsSubmitting(false);
     } catch (error) {
-        console.error('Error signing up user: ', error.message);
+        console.error('Error creating account: ', error.message);
     }
   };
 
