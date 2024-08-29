@@ -4,6 +4,11 @@ import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage'
 import { getFirestore, collection, doc, setDoc } from 'firebase/firestore';
 import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID, MEASUREMENT_ID } from '@env';
 
+
+//================================================================================================
+//INITIALIZE AND CONFIG
+//=================================================================================================
+
 const firebaseConfig = {
   apiKey: API_KEY,
   authDomain: AUTH_DOMAIN,
@@ -21,6 +26,11 @@ const auth = initializeAuth(app, {
     });
 
 const db = getFirestore(app);
+
+
+//=================================================================================================
+//SIGN IN/UP FUNCTIONS
+//=================================================================================================
 
 const signIn = async (email, password) => {   
     try {
@@ -43,6 +53,8 @@ const signUp = async (displayName, email, password) => {
 
         await updateProfile(user, { displayName: displayName })
 
+        //automatically creates 'users' collection if it doesn't exist, 
+        //and adds new user with user.uid as id with email and username properties. 
         const userRef = doc(collection(db, 'users'), user.uid);
         await setDoc(userRef, {
             username: displayName,
