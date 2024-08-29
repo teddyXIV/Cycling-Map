@@ -8,8 +8,7 @@ import image from '../../constants/images'
 import CustomButton from '../../components/CustomButton'
 import { Link } from 'expo-router'
 
-import { auth } from "../firebase"
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signIn } from "../firebase"
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -19,23 +18,28 @@ const SignIn = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const submit = async (email, password) => {
+    setIsSubmitting(true);
+
+    signIn(email, password)
+
+    setIsSubmitting(false);
     
-    try {
-      setIsSubmitting(true);
+    // try {
+    //   setIsSubmitting(true);
 
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    //   const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
-      const user = userCredential.user;
+    //   const user = userCredential.user;
 
-      console.log(user);
+    //   console.log(user);
 
-      console.log(`${user.email} signed in!`)
+    //   console.log(`${user.email} signed in!`)
 
-      setIsSubmitting(false);
+    //   setIsSubmitting(false);
 
-    } catch (error) {
-      console.error('Error signing in: ', error.message);
-    }
+    // } catch (error) {
+    //   console.error('Error signing in: ', error.message);
+    // }
 
   }
 

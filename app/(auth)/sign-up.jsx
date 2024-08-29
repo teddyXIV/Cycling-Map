@@ -8,36 +8,22 @@ import image from '../../constants/images'
 import CustomButton from '../../components/CustomButton'
 import { Link } from 'expo-router'
 
-import { db, auth } from "../firebase"
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { signUp } from "../firebase"
 
 const SignUp = () => {
   const [form, setForm] = useState({
-    username: '',
+    displayName: '',
     email: '',
     password: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const submit = async (username, email, password) => {
-    try {
-        setIsSubmitting(true);
+  const submit = async (displayName, email, password) => {
+    setIsSubmitting(true);
 
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    signUp(displayName, email, password);
 
-        const user = userCredential.user;
-
-        const userRef = doc(collection(db, 'users'), user.uid);
-        await setDoc(userRef, {
-            username: username,
-            email: email
-        });
-
-        setIsSubmitting(false);
-    } catch (error) {
-        console.error('Error creating account: ', error.message);
-    }
+    setIsSubmitting(false);
   };
 
   return (
@@ -51,8 +37,8 @@ const SignUp = () => {
           <Text className="text-white text-2xl text-semibold mt-1 font-semibold">Sign up to BikeRouter</Text>
           <FormField 
             title="Username"
-            value={form.username}
-            handleChangeText={(e) => setForm({ ...form, username: e })}
+            value={form.displayName}
+            handleChangeText={(e) => setForm({ ...form, displayName: e })}
             otherStyles="mt-5"
           />
           <FormField 
@@ -70,7 +56,7 @@ const SignUp = () => {
           />
           <CustomButton 
             title="Sign up"
-            handlePress={() => submit(form.username, form.email, form.password)}
+            handlePress={() => submit(form.displayName, form.email, form.password)}
             containerStyles={"mt-7"}
             isLoading={isSubmitting}
             />
