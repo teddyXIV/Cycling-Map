@@ -9,7 +9,7 @@ import image from '../../constants/images'
 import CustomButton from '../../components/CustomButton'
 import { Link } from 'expo-router'
 
-import { signIn } from "../firebase"
+import { signIn } from "../../lib/firebase"
 
 const SignIn = () => {
   const [form, setForm] = useState({

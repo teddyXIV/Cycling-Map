@@ -1,25 +1,34 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, RefreshControl } from 'react-native'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { FlatList, Image } from 'react-native'
 import { useGlobalContext } from '../../context/GlobalProvider.js';
 import images from '../../constants/images.js';
 import Recent from '../../components/Recent.jsx';
+import EmptyState from '../../components/EmptyState.jsx';
 
 const Home = () => {
   const { currentUser } = useGlobalContext();
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    // recall to see if there are any new routes
+    setRefreshing(false);
+  }
 
   return (
-    <SafeAreaView className="bg-primary">
+    <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+        // data={[]}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Text className="text-3xl text-white">{item.id}</Text>
         )}
         ListHeaderComponent={() => (
-          <View className='my-6 px-4 space-y-6'>
-            <View className="justify-between items-start flex-row mb-6">
+          <View className='my-6 px-4 space-y-2'>
+            <View className="justify-between items-start flex-row mb-4">
               <View>
                 <Text className="font-medium text-sm text-gray-300">
                   Welcome back
@@ -41,11 +50,20 @@ const Home = () => {
                 Recent routes
               </Text>
               <Recent
-                routes={[{ id: 1 }, { id: 33 }, { id: 3 }] ?? []}
+                routes={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []}
               />
             </View>
           </View>
         )}
+        ListEmptyComponent={() => (
+          <EmptyState
+            title="No routes found"
+            subtitle="Create some routes!" />
+        )}
+        refreshControl={<RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />}
       />
     </SafeAreaView>
 
