@@ -6,7 +6,7 @@ import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, 
 
 
 //================================================================================================
-//INITIALIZE AND CONFIG
+//INITIALIZE AND CONFIG arbitrary change
 //=================================================================================================
 
 const firebaseConfig = {
@@ -22,8 +22,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = initializeAuth(app, {
-    persistence: getReactNativePersistence(ReactNativeAsyncStorage)
-    });
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+});
 
 const db = getFirestore(app);
 
@@ -32,39 +32,39 @@ const db = getFirestore(app);
 //SIGN IN/UP FUNCTIONS
 //=================================================================================================
 
-const signIn = async (email, password) => {   
-    try {
+const signIn = async (email, password) => {
+  try {
 
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
-      const user = userCredential.user;
+    const user = userCredential.user;
 
-      console.log(`${user.displayName} signed in!`)
+    console.log(`${user.displayName} signed in!`)
 
-    } catch (error) {
-      console.error('Error signing in: ', error.message);
-    }
+  } catch (error) {
+    console.error('Error signing in: ', error.message);
+  }
 }
 
 const signUp = async (displayName, email, password) => {
-    try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
 
-        await updateProfile(user, { displayName: displayName })
+    await updateProfile(user, { displayName: displayName })
 
-        //automatically creates 'users' collection if it doesn't exist, 
-        //and adds new user with user.uid as id with email and username properties. 
-        const userRef = doc(collection(db, 'users'), user.uid);
-        await setDoc(userRef, {
-            username: displayName,
-            email: email
-        });
+    //automatically creates 'users' collection if it doesn't exist, 
+    //and adds new user with user.uid as id with email and username properties. 
+    const userRef = doc(collection(db, 'users'), user.uid);
+    await setDoc(userRef, {
+      username: displayName,
+      email: email
+    });
 
-    } catch (error) {
-        console.error('Error creating account: ', error.message);
-    }
-  };
+  } catch (error) {
+    console.error('Error creating account: ', error.message);
+  }
+};
 
 
 export { db, auth, signIn, signUp };
