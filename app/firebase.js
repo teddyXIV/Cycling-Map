@@ -1,12 +1,12 @@
 import { initializeApp } from 'firebase/app';
-import { initializeAuth, getReactNativePersistence, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { initializeAuth, getReactNativePersistence, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from 'firebase/auth';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage'
 import { getFirestore, collection, doc, setDoc } from 'firebase/firestore';
 import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID, MEASUREMENT_ID } from '@env';
 
 
 //================================================================================================
-//INITIALIZE AND CONFIG arbitrary change
+//INITIALIZE AND CONFIG 
 //=================================================================================================
 
 const firebaseConfig = {
@@ -41,6 +41,8 @@ const signIn = async (email, password) => {
 
     console.log(`${user.displayName} signed in!`)
 
+    return user;
+
   } catch (error) {
     console.error('Error signing in: ', error.message);
   }
@@ -60,6 +62,8 @@ const signUp = async (displayName, email, password) => {
       username: displayName,
       email: email
     });
+
+    return user;
 
   } catch (error) {
     console.error('Error creating account: ', error.message);
