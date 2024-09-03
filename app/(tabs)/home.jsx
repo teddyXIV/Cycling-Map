@@ -8,6 +8,7 @@ import Recent from '../../components/Recent.jsx';
 import EmptyState from '../../components/EmptyState.jsx';
 import { getRoutes } from '../../lib/firebase.js';
 import useDb from '../../lib/useDb.js'
+import RouteCard from '../../components/RouteCard.jsx';
 
 const Home = () => {
   const { currentUser } = useGlobalContext();
@@ -26,12 +27,12 @@ const Home = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+        // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
         // data={[]}
-        // data={routes}
-        keyExtractor={(item) => item.id}
+        data={routes}
+        keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
-          <Text className="text-3xl text-white">{item.id}</Text>
+          <RouteCard route={item} />
         )}
         ListHeaderComponent={() => (
           <View className='my-6 px-4 space-y-2'>
@@ -57,8 +58,8 @@ const Home = () => {
                 Recent routes
               </Text>
               <Recent
-                // routes={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []}
-                routes={routes}
+                routes={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []}
+              // routes={routes}
               />
             </View>
           </View>
