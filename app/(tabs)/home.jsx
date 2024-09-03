@@ -1,27 +1,34 @@
 import { View, Text, RefreshControl } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { FlatList, Image } from 'react-native'
 import { useGlobalContext } from '../../context/GlobalProvider.js';
 import images from '../../constants/images.js';
 import Recent from '../../components/Recent.jsx';
 import EmptyState from '../../components/EmptyState.jsx';
+import { getRoutes } from '../../lib/firebase.js';
+import useDb from '../../lib/useDb.js'
 
 const Home = () => {
   const { currentUser } = useGlobalContext();
   const [refreshing, setRefreshing] = useState(false);
 
+  const { data: routes, refetch } = useDb(getRoutes, currentUser);
+
   const onRefresh = async () => {
     setRefreshing(true);
-    // recall to see if there are any new routes
+    await refetch();
     setRefreshing(false);
   }
+
+  // const routes = getRoutes(currentUser);
 
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
         // data={[]}
+        // data={routes}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Text className="text-3xl text-white">{item.id}</Text>
@@ -33,7 +40,7 @@ const Home = () => {
                 <Text className="font-medium text-sm text-gray-300">
                   Welcome back
                 </Text>
-                <Text className="text-white text-2xl font-semibold">
+                <Text className="text-white text-2xl font-tsemibold">
                   {currentUser.displayName}
                 </Text>
               </View>
@@ -46,11 +53,12 @@ const Home = () => {
               </View>
             </View>
             <View className="w-full flex-1 pt-5 pb-8">
-              <Text className="text-gray-300 test-lg font-regular mb-3">
+              <Text className="text-gray-300 test-lg font-tregular mb-3">
                 Recent routes
               </Text>
               <Recent
-                routes={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []}
+                // routes={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []}
+                routes={routes}
               />
             </View>
           </View>

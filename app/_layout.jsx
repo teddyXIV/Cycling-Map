@@ -11,8 +11,9 @@ const RootLayout = () => {
     "Titillium-Black": require("../assets/fonts/Titillium-Black.otf"),
     "Titillium-Bold": require("../assets/fonts/Titillium-Bold.otf"),
     "Titillium-Regular": require("../assets/fonts/Titillium-Regular.otf"),
-    "Titillium-RegularUpright": require("../assets/fonts/Titillium-RegularUpright.otf"),
-    "Titillium-BoldUpright": require("../assets/fonts/Titillium-BoldUpright.otf"),
+    "Titillium-Semibold": require("../assets/fonts/Titillium-Semibold.otf"),
+    "Titillium-Thin": require("../assets/fonts/Titillium-Thin.otf"),
+    "Titillium-Light": require("../assets/fonts/Titillium-Light.otf")
   })
 
   useEffect(() => {

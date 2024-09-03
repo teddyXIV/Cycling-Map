@@ -10,10 +10,16 @@ module.exports = {
         tertiary: '#50FFB1'
       },
       fontFamily: {
-        main: ['Arial']
+        tblack: ["Titillium-Black", "sans-serif"],
+        tbold: ["Titillium-Bold", "sans-serif"],
+        tregular: ["Titillium-Regular", "sans-serif"],
+        tsemibold: ["Titillium-Semibold", "sans-serif"],
+        tthin: ["Titillium-Thin", "sans-serif"],
+        tlight: ["Titillium-Light", "sans-serif"]
       }
     },
   },
   plugins: [],
 }
+
 
