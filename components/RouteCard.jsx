@@ -4,7 +4,6 @@ import images from '../constants/images.js';
 import icons from '../constants/icons.js';
 
 const RouteCard = ({ route: { name, imageUrl } }) => {
-  console.log("IMAGEURL: ", imageUrl);
 
   return (
     <View className="flex-col items-center px-4 mb-14">

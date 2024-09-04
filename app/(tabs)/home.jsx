@@ -2,6 +2,7 @@ import { View, Text, RefreshControl } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { FlatList, Image } from 'react-native'
+import { StatusBar } from 'expo-status-bar';
 import { useGlobalContext } from '../../context/GlobalProvider.js';
 import images from '../../constants/images.js';
 import Recent from '../../components/Recent.jsx';
@@ -53,7 +54,7 @@ const Home = () => {
                 />
               </View>
             </View>
-            <View className="w-full flex-1 pt-5 pb-8">
+            {/* <View className="w-full flex-1 pt-5 pb-8">
               <Text className="text-gray-300 test-lg font-tregular mb-3">
                 Recent routes
               </Text>
@@ -61,7 +62,7 @@ const Home = () => {
                 routes={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []}
               // routes={routes}
               />
-            </View>
+            </View> */}
           </View>
         )}
         ListEmptyComponent={() => (
@@ -74,6 +75,7 @@ const Home = () => {
           onRefresh={onRefresh}
         />}
       />
+      <StatusBar backgroundColor='#001513' style='light' />
     </SafeAreaView>
 
   )
