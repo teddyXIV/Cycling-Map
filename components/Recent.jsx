@@ -1,6 +1,5 @@
-import { View, Text } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
 import React from 'react'
-import { FlatList } from 'react-native'
 
 const Recent = ({ routes }) => {
   return (
@@ -8,7 +7,7 @@ const Recent = ({ routes }) => {
       data={routes}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        <Text className="text-3xl text-white">{item.id}</Text>
+        <Text className="text-3xl text-white">{item.name}</Text>
       )}
       horizontal
     />
