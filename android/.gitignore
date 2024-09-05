@@ -12,7 +12,6 @@ local.properties
 *.hprof
 .cxx/
 *.keystore
-gradle.properties
 
 # Bundle artifacts
 *.jsbundle
