@@ -24,6 +24,10 @@ export default {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#ffffff',
       },
+      permissions: [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
     },
     web: {
       favicon: './assets/favicon.png',
@@ -39,6 +43,12 @@ export default {
         },
       ],
       'expo-dev-client',
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Show current location on map."
+        }
+      ]
     ],
   },
 };
