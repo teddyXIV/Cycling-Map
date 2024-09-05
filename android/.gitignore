@@ -12,6 +12,8 @@ local.properties
 *.hprof
 .cxx/
 *.keystore
+
+# adding gradle.properties
 gradle.properties
 
 # Bundle artifacts
