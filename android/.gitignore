@@ -13,8 +13,5 @@ local.properties
 .cxx/
 *.keystore
 
-# adding gradle.properties
-gradle.properties
-
 # Bundle artifacts
 *.jsbundle
