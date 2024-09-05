@@ -15,3 +15,5 @@ local.properties
 
 # Bundle artifacts
 *.jsbundle
+
+#testing ignoring gradle.properties
