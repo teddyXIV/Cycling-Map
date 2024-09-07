@@ -32,7 +32,10 @@ export default function App() {
           <Text className="text-sm text-gray-100 mt-3 text-center">Push your limits beyond what you thought was possible.</Text>
           <CustomButton
             title="Get started"
-            handlePress={() => router.push('/sign-in')}
+            handlePress={() => {
+              console.log("button push")
+              router.push('/sign-in')
+            }}
             containerStyles="w-full mt-7" />
         </View>
       </ScrollView>
